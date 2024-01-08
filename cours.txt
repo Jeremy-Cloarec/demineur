@@ -1,0 +1,15 @@
+Qu'est ce qu'un design pattern ?
+
+SOLID : bible de la POO
+
+GRASP : améliorer la qualité d'architecture
+Responsabilité : notion fdmtale. multicouche & module.
+Concept : couches/controlleurs/services/entité. 
+
+GOF: 4 recueil de solutions élégantes
+S'appuie sur la POO : les 4 piliers. 
+Important de connaître au moins certains design pattern. 
+
+KISS and DRY. 
+
+
