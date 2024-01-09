@@ -1,13 +1,14 @@
 import { Grid } from "../logic/grid.js";
 import { Cell } from "../logic/entities/cell.js";
 import { EItem } from "../logic/enums/e-item.js";
+import { CellBomb } from "../logic/entities/cell-bomb.js";
+import { CellRabbit } from "../logic/entities/cell-rabbit.js";
 
 export class GridBuilder {
     grid: Grid;
     width = 20;
     height = 20;
     density = 0.1;
-
 
     constructor(grid: Grid) {
         this.grid = grid;
@@ -27,7 +28,7 @@ export class GridBuilder {
         for (let shuffle = 0; shuffle < nbShuffles; shuffle++) {
             let i = Math.floor(Math.random() * nbCells);
             let j = Math.floor(Math.random() * nbCells);
-            if (i != j)
+            if (i == j)
                 continue;
             let a = vector[i];
             let b = vector[j];
@@ -41,8 +42,16 @@ export class GridBuilder {
             let row = [] as Cell[];
             for (let x = 0; x < this.width; x++) {
                 const bomb = vector[y * this.width + x];
-                const cell = new Cell(this.grid, x, y, EItem.Bomb);
-                row.push(cell);
+                if (bomb){
+                    row.push(new CellBomb(this.grid, x, y));
+                    continue
+                }
+                const rabbit = Math.random() < this.density ? EItem.Rabbit : EItem.Ground;    
+                if (rabbit){
+                    row.push(new CellRabbit(this.grid, x, y));
+                    continue
+                }
+                row.push(new Cell(this.grid, x, y));
             }
             rows.push(row);
         }

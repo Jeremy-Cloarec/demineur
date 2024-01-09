@@ -8,11 +8,7 @@ export class Cell {
     readonly item: EItem;
     hit = false;
 
-    get icon() {
-        if(this.item == EItem.Bomb)
-            return '<span class="material-symbols-outlined">bomb</span>';
-        if(this.item == EItem.Rabbit)
-            return '<span class="material-symbols-outlined">cruelty_free</span>';
+    get icon():string {
         return "";
     }
 
@@ -24,11 +20,11 @@ export class Cell {
     }
 
     //Création d'une grille
-    constructor(grid: Grid, x: number, y: number, item: EItem) {
+    constructor(grid: Grid, x: number, y: number, item?: EItem) {
         this.grid = grid;
         this.x = x;
         this.y = y;
-        this.item = item; 
+        this.item = item ?? EItem.Ground; 
     }
 
     //Gestion d'un click sur une cellule

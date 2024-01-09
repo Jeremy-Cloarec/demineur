@@ -1,10 +1,6 @@
 import { EItem } from "../enums/e-item.js";
 export class Cell {
     get icon() {
-        if (this.item == EItem.Bomb)
-            return '<span class="material-symbols-outlined">bomb</span>';
-        if (this.item == EItem.Rabbit)
-            return '<span class="material-symbols-outlined">cruelty_free</span>';
         return "";
     }
     get bomb() {
@@ -19,7 +15,7 @@ export class Cell {
         this.grid = grid;
         this.x = x;
         this.y = y;
-        this.item = item;
+        this.item = item !== null && item !== void 0 ? item : EItem.Ground;
     }
     //Gestion d'un click sur une cellule
     get risk() {

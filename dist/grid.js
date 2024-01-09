@@ -41,4 +41,4 @@ export class Grid {
         game.start(this);
     }
 }
-Grid.BOMB = '<span class="material-symbols-outlined">bomb</span>';
+// Grid.BOMB = '<span class="material-symbols-outlined">bomb</span>';

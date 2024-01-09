@@ -1,9 +1,7 @@
 import { Grid } from "../logic/grid.js";
 import { Game } from "../logic/entities/game.js";
-import { Cell } from "../logic/entities/cell.js";
-import { IGridView } from "../interfaces/i-grid-view.js";
 
-export class GridView implements IGridView {
+export class GridView {
     readonly grid: Grid;
     readonly cells: HTMLElement[][] = [];
 
@@ -37,21 +35,16 @@ export class GridView implements IGridView {
                 const htmlCell = document.createElement("li");
                 htmlCell.classList.add("ground_cell", "mask");
                 htmlCell.innerHTML = cell.icon;
-                htmlCell.onclick = () => Game.INSTANCE.play(this, cell);
+                htmlCell.onclick = () => Game.INSTANCE.play(cell);
                 htmlCells.appendChild(htmlCell);
                 this.cells[y].push(htmlCell);
             }
         }
+        //Abonnement
+        Game.INSTANCE.onHit.listen(cell => this.cells[cell.y][cell.x].classList.remove("mask"));
+        Game.INSTANCE.onHelp.listen(e => this.cells[e.cell.y][e.cell.x].innerHTML = e.hint);
 
         // Insertion du tableau dans la page
         htmlMain.appendChild(htmlGrid);
-    }
-
-    show(cell: Cell) {
-        this.cells[cell.y][cell.x].classList.remove("mask");
-    }
-
-    help(cell: Cell, hint: string) {
-        this.cells[cell.y][cell.x].innerHTML = hint;
     }
 }
