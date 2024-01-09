@@ -1,14 +1,17 @@
-import { Grid } from "../grid.js";
 import { GridView } from "../../ui/grid.view.js";
 import { win, lose } from "../../popup.js";
 import { Cell } from "./cell.js";
+import { IGridView } from "../../interfaces/i-grid-view.js";
 
 export class Game {
-
+    //Singleton
+    public static INSTANCE: Game = new Game();
+    private constructor() { }
+;
     //démarrage du jeu
     start() { };
 
-    play(view: GridView, cell: Cell) {
+    play(view: IGridView, cell: Cell) {
         if (cell.hit)
             return;
 
@@ -18,7 +21,7 @@ export class Game {
             lose();
         } else {
             let n = cell.risk;
-            let hint = n >= 1 ? `${n}` : "";
+            let hint = cell.ground && n>=1 ? `${n}` : cell.icon;
             view.help(cell, hint);
             let grid = cell.grid;
             if (grid.remaining == 0) {

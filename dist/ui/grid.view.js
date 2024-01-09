@@ -1,10 +1,11 @@
+import { Game } from "../logic/entities/game.js";
 export class GridView {
     constructor(grid) {
         this.cells = [];
         this.grid = grid;
     }
     //Dessin de la grille
-    draw(game) {
+    draw() {
         //Création d'une grille avec liste imbriquée
         const htmlMain = document.getElementById("ground");
         const htmlGrid = document.createElement("ul");
@@ -24,8 +25,8 @@ export class GridView {
                 const cell = this.grid.cells[y][x];
                 const htmlCell = document.createElement("li");
                 htmlCell.classList.add("ground_cell", "mask");
-                htmlCell.innerHTML = cell.bomb ? GridView.BOMB : "";
-                htmlCell.onclick = () => game.play(this, cell);
+                htmlCell.innerHTML = cell.icon;
+                htmlCell.onclick = () => Game.INSTANCE.play(this, cell);
                 htmlCells.appendChild(htmlCell);
                 this.cells[y].push(htmlCell);
             }
@@ -40,4 +41,3 @@ export class GridView {
         this.cells[cell.y][cell.x].innerHTML = hint;
     }
 }
-GridView.BOMB = '<span class="material-symbols-outlined">bomb</span>';

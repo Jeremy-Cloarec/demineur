@@ -1,5 +1,7 @@
 import { win, lose } from "../../popup.js";
 export class Game {
+    constructor() { }
+    ;
     //démarrage du jeu
     start() { }
     ;
@@ -13,7 +15,7 @@ export class Game {
         }
         else {
             let n = cell.risk;
-            let hint = n >= 1 ? `${n}` : "";
+            let hint = cell.ground && n >= 1 ? `${n}` : cell.icon;
             view.help(cell, hint);
             let grid = cell.grid;
             if (grid.remaining == 0) {
@@ -25,3 +27,5 @@ export class Game {
         }
     }
 }
+//Singleton
+Game.INSTANCE = new Game();
